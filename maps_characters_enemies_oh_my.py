@@ -1,3 +1,4 @@
+from time import sleep
 
 class Player():
     def __init__(self, player_name, hp, money, defence, speed):
@@ -17,7 +18,6 @@ def choose_player_type():
         possible_answers = ['S', 's', 'F', 'f']
         if char_choice in possible_answers:
             break
-
     return char_choice.lower()
 
 
@@ -26,7 +26,6 @@ def name_your_player():
         name_input = input('What is your name? ')
         if name_input is not '':
             break
-
     return name_input
 
 
@@ -36,11 +35,22 @@ def invert_player_name(string_in):
 
 
 def main():
-    print("Welcome")
+    print(".::::::::::::::::::::::::::::::::::::::::::::::.")
+    sleep(.5)
+    print(".::.           Welcome                      .::.")
+    sleep(.5)
     print(".::. I hope you are ready for an adventure. .::.")
+    sleep(.5)
+    print(".::::::::::::::::::::::::::::::::::::::::::::::.\n\n")
+    sleep(2)
     player_name = name_your_player()
     player_name = invert_player_name(player_name)
     player_name = player_name.title()
+    sleep(2)
+    print(".::::::::::::::::::::::::::::::::::::::::::::::.")
+    sleep(.5)
+    print(".::::::::::::::::::::::::::::::::::::::::::::::.")
+    sleep(.5)
     print("Well, {}, you seem up to the task {}.".format(player_name, player_name))
     player_type = choose_player_type()
     if player_type == 's':
