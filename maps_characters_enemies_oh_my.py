@@ -104,8 +104,18 @@ def main():
     sleep(3)
     print("Jeez.  Wake up man.  Were you planning on sleeping all day?")
     sleep(2)
-    print("That was a rhetorical question.  We should begin immediately.  Here, Take this sword")
-
+    print("That was a rhetorical question.  We should begin immediately.  My name is Wazzere.  Here, Take this sword.")
+    sleep(3)
+    print("ZZZZzzzzzZZzzzzzZZzzZzzzzzZZzzZZzzZzzZZZZZZzzZZzzZZzzZZZzzZzzzZZzzZZzzzZzzzZZzzZZzZZzzzZZZzzzZZzzZZzzzzzzzz")
+    sleep(1)
+    print("zzzZzzzzzZZzzzzzZZzzZZzzZzzZZZZZZzzZZzzZZzzZZZzzZzzZZzzzzzZZzzZZzzZzzZZZZZZzzZZzzZZzzZZZzzZzzzZZzzZZzzzZzzz")
+    print("ZzzzzZZzzzZZZZzzzzzZZzzzzzZZzzZZzzZzzZZZZZzzzzzZZzzZZzzZzzZZZZZZzzZZzzZZZZzzzzzZZzzZZzzZzzZZZZZZzzZZzzZZzzz")
+    sleep(1)
+    print("damn it, man.  You shouldn't fall asleep with a sword in your hand.  Get up.  It's time to go.")
+    print("\n\n\n\n")
+    sleep(4)
+    print("{} and Wazzere emerge from The Round Table, swords in hand.\n\n".format(player_name))
+    sleep(2)
 
 
 if __name__ == "__main__":
