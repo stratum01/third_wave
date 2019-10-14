@@ -1,4 +1,7 @@
 from time import sleep
+import requests
+from bs4 import BeautifulSoup
+import random
 
 
 class Player():
@@ -33,6 +36,17 @@ def name_your_player():
 def invert_player_name(string_in):
     string_in = string_in.lower()
     return string_in[::-1]
+
+
+def get_the_news():
+    news_choices = ['minecraft', 'dungeons', 'Adventure.Time', 'xbox.one']
+    rando_news_choice = news_choices[random.randint(0, len(news_choices) - 1)]
+    r1 = requests.get('https://www.google.com/search?q=' + rando_news_choice + '&source=lnms&tbm=nws')
+    news_page = r1.content
+    soup1 = BeautifulSoup(news_page, 'html5lib')
+    soupdivs = soup1.find("div", class_='g')
+    news_headline = soupdivs.text
+    return news_headline.split()
 
 
 def main():
@@ -115,6 +129,22 @@ def main():
     print("\n\n\n\n")
     sleep(4)
     print("{} and Wazzere emerge from The Round Table, swords in hand.\n\n".format(player_name))
+    sleep(2)
+    print("Looking left, {} sees the town Newspaper.  The headline reads: ".format(player_name))
+    print("\n\n **********************************************")
+    print("*******The Herald of Heralds by Herald**********")
+    print(" **********************************************")
+    news_words = get_the_news()
+    counter = 0
+    for x in range(0, len(news_words)):
+        if counter < 8:
+            print(news_words[x] + ' ', end='')
+            counter = counter + 1
+        else:
+            print(news_words[x])
+            counter = 0
+    print("\n**********************************************")
+    print("**********************************************")
     sleep(2)
 
 
