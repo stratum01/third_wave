@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 import random
 
 
-class Player():
+class Player:
     def __init__(self, player_name, hp, money, defence, speed):
         self.player_name = player_name
         self.hp = hp
@@ -14,6 +14,18 @@ class Player():
 
     def __str__(self):
         return f'{self.player_name} HP:{self.hp} Money:{self.money}'
+
+
+class GenerateEnemy:
+    def __init__(self):
+        enemy_types = ['Ogre', 'Giant Spider', 'Troll']
+        self.enemy_type = enemy_types[random.randint(0, len(enemy_types))]
+        self.hp = random.randint(0, 50)
+        self.defence = random.randint(0, 50)
+        self.speed = random.randint(0, 50)
+
+    def __str__(self):
+        return f'{self.enemy_type} HP:{self.hp} Defence:{self.defence}'
 
 
 def choose_player_type():
@@ -40,14 +52,25 @@ def invert_player_name(string_in):
 
 def get_the_news():
     news_choices = ['minecraft', 'dungeons', 'Adventure.Time', 'xbox.one']
-    rando_news_choice = news_choices[random.randint(0, len(news_choices) - 1)]
-    r1 = requests.get('https://www.google.com/search?q=' + rando_news_choice + '&source=lnms&tbm=nws')
-    news_page = r1.content
-    soup1 = BeautifulSoup(news_page, 'html5lib')
-    soupdivs = soup1.find("div", class_='g')
-    news_headline = soupdivs.text
+    try:
+        rando_news_choice = news_choices[random.randint(0, len(news_choices) - 1)]
+        r1 = requests.get('https://www.google.com/search?q=' + rando_news_choice + '&source=lnms&tbm=nws')
+        news_page = r1.content
+        soup1 = BeautifulSoup(news_page, 'html5lib')
+        soupdivs = soup1.find("div", class_='g')
+        news_headline = soupdivs.text
+    except(ConnectionError, Exception):
+        news_headline = 'Ogres, Giant Spiders, and DemonFerries - oh my.  Old maleficent news, or something to watch'
     return news_headline.split()
 
+
+def slowprint(slowinput):
+    string_in = slowinput.split()
+    for x in range(0, len(string_in)):
+        print(string_in[x] + ' ', end='')
+        sleep(random.random())
+    print("")
+    return True
 
 def main():
     print(".::::::::::::::::::::::::::::::::::::::::::::::.")
@@ -143,9 +166,28 @@ def main():
         else:
             print(news_words[x])
             counter = 0
+        if x == 11:
+            if len(news_words[x]) > 3:
+                magic_word = news_words[x]
+            else:
+                magic_word = 'Open Sesame in the bottom corner'
     print("\n**********************************************")
     print("**********************************************")
     sleep(2)
+    print("\nThe word {} really stuck out to {}".format(magic_word, player_name))
+    sleep(2)
+    print("\n . . . . Lets get going, buddy.\n")
+    sleep(2)
+    slowprint("  The pair proceed punctually picking up the pace, with Wazzere leading the way, the path takes them")
+    slowprint("into a thick forrest. Wazzere grabs a fallen branch, and utters .:Incendio:. and the end of the branch")
+    slowprint("burst into flames.")
+    print("")
+    slowprint("Now that we can see what is in front of us, how do you look?")
+    print(hero)
+    print("\n\n")
+    slowprint("Wazzere exclaims, That's good, because here comes our first challenge.")
+    enemy = GenerateEnemy()
+    print(enemy)
 
 
 if __name__ == "__main__":
