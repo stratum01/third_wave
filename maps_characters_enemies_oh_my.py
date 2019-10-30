@@ -18,14 +18,18 @@ class Player:
 
 class GenerateEnemy:
     def __init__(self):
-        enemy_types = ['Ogre', 'Giant Spider', 'Troll']
-        self.enemy_type = enemy_types[random.randint(0, len(enemy_types))]
-        self.hp = random.randint(0, 50)
+        enemy_types = ['Ogre', 'Giant Spider', 'Troll', 'Undead']
+        self.enemy_type = enemy_types[random.randint(0, len(enemy_types)-1)]
+        self.hp = random.randint(0, 75)
         self.defence = random.randint(0, 50)
         self.speed = random.randint(0, 50)
 
     def __str__(self):
         return f'{self.enemy_type} HP:{self.hp} Defence:{self.defence}'
+
+
+def attack(attack_hp, attack_defence, attack_speed):
+    return int(round (attack_hp * attack_defence) / random.randint(0, attack_speed) * .1)
 
 
 def choose_player_type():
@@ -71,6 +75,7 @@ def slowprint(slowinput):
         sleep(random.random())
     print("")
     return True
+
 
 def main():
     print(".::::::::::::::::::::::::::::::::::::::::::::::.")
@@ -188,6 +193,33 @@ def main():
     slowprint("Wazzere exclaims, That's good, because here comes our first challenge.")
     enemy = GenerateEnemy()
     print(enemy)
+    while hero.hp > 0:
+        while True:
+            player_choice = input("well, {} are you going to (a)ttack or "
+                                  "(f)lee?".format(hero.player_name, hero.player_name))
+            if player_choice in ['A', 'a', 'F', 'f']:
+                break
+            else:
+                print("choose faster next time, the {} is going to attack".format(enemy.enemy_type))
+                enemy_attack = attack(enemy.hp, enemy.defence, enemy.speed)
+                print(".: The {} pounds {} :.".format(enemy.enemy_type, hero.player_name))
+                print(str(enemy_attack) + " hp lost!!" )
+                hero.hp = hero.hp - enemy_attack
+                print(hero)
+        if player_choice == 'A' or player_choice == 'a':
+            player_attack = attack(hero.hp, hero.defence, hero.speed)
+            print("{} clobbers the {}".format(hero.player_name, enemy.enemy_type))
+            print("Boom. " + str(player_attack) + " hp off.")
+            enemy.hp = enemy.hp - player_attack
+            if enemy.hp <= 0:
+                print("the {} is dead!".format(enemy.enemy_type))
+                exit(0)
+            else:
+                print(enemy)
+        else:
+            print("you chicken, Wazzere comments right before the {} wallops his head off".format(enemy.enemy_type))
+            exit(0)
+
 
 
 if __name__ == "__main__":
